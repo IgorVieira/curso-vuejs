@@ -1,17 +1,25 @@
 <template>
-  <div>
-    <h1>{{ titulo }}</h1>
+  <div class="corpo">
+    <h1 class="centralizado">{{ titulo }}</h1>
 
-    <ul v-for="foto of fotos">
-      <li>
-        <img :src="foto.url" :alt="foto.titulo">
+    <ul class="lista-fotos">
+      <li class="lista-fotos-item" v-for="foto of fotos">
+        <meu-painel :titulo="foto.titulo">
+          <img :src="foto.url" :alt="foto.titulo">
+        </meu-painel>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import Painel from './components/shared/painel/Painel.vue'
+
 export default {
+  components : {
+    'meu-painel' : Painel
+  },
+
   data () {
     return {
       titulo : 'Calopsita',
@@ -27,5 +35,24 @@ export default {
 </script>
 
 <style>
+  .centralizado {
+    text-align: center;
+  }
 
+  .corpo {
+    font-family: Helvetica, sans-serif;
+    margin: 0 auto;
+    width: 96%;
+  }
+
+  .lista-fotos {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .lista-fotos-item {
+    display: inline-block;
+    margin-bottom: 20px;
+  }
 </style>
