@@ -1,78 +1,29 @@
 <template>
   <div class="corpo">
-    <h1 class="centralizado">{{ titulo }}</h1>
+    <meu-menu :rotas="routes" />
 
-    <input type="search" @input="filtro = $event.target.value" placeholder="Filtre pelo título da foto" class="filtro">
-
-    <ul class="lista-fotos">
-      <li class="lista-fotos-item" v-for="foto of fotosComFiltro">
-        <meu-painel :titulo="foto.titulo">
-          <image-reponsiva :url="foto.url" :titulo="foto.title" />
-        </meu-painel>
-      </li>
-    </ul>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Painel from './components/shared/painel/Painel.vue'
-import ImageResponsiva from './components/shared/image-responsiva/ImageResponsiva.vue'
+import { routes } from './routes'
+import Menu from './components/shared/menu/Menu.vue'
 
 export default {
   components : {
-    'meu-painel' : Painel,
-    'image-reponsiva' : ImageResponsiva
+    'meu-menu' : Menu
   },
-  computed : {
-    fotosComFiltro() {
-      if (this.filtro) {
-        let exp = new RegExp(this.filtro.trim(), 'i')
-
-        return this.fotos.filter(foto => exp.test(foto.titulo))
-      } else {
-        return this.fotos
-      }
-    }
-  },
-  data () {
-    return {
-      titulo : 'Calopsita',
-      fotos : [],
-      filtro : ''
-    }
-  },
-  created() {
-    this.$http.get('http://localhost:3000/v1/fotos')
-              .then(res => res.json())
-              .then(fotos => this.fotos = fotos, err => console.log(err))
+  data() {
+    return { routes }
   }
 }
 </script>
 
 <style>
-  .centralizado {
-    text-align: center;
-  }
-
   .corpo {
     font-family: Helvetica, sans-serif;
     margin: 0 auto;
     width: 96%;
-  }
-
-  .lista-fotos {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .lista-fotos-item {
-    display: inline-block;
-    margin-bottom: 20px;
-  }
-
-  .filtro {
-    display: block;
-    width: 100%;
   }
 </style>
