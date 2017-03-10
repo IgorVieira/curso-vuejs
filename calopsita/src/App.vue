@@ -7,7 +7,7 @@
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotosComFiltro">
         <meu-painel :titulo="foto.titulo">
-          <img :src="foto.url" :alt="foto.titulo">
+          <image-reponsiva :url="foto.url" :titulo="foto.title" />
         </meu-painel>
       </li>
     </ul>
@@ -16,10 +16,12 @@
 
 <script>
 import Painel from './components/shared/painel/Painel.vue'
+import ImageResponsiva from './components/shared/image-responsiva/ImageResponsiva.vue'
 
 export default {
   components : {
-    'meu-painel' : Painel
+    'meu-painel' : Painel,
+    'image-reponsiva' : ImageResponsiva
   },
   computed : {
     fotosComFiltro() {
@@ -39,7 +41,6 @@ export default {
       filtro : ''
     }
   },
-  
   created() {
     this.$http.get('http://localhost:3000/v1/fotos')
               .then(res => res.json())
