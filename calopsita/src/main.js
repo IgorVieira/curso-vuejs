@@ -4,6 +4,8 @@ import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
 import { routes } from './routes'
 
+import './directives/Transform.js'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({ 
