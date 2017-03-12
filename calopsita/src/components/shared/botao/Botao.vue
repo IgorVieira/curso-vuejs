@@ -32,7 +32,7 @@
     },
     computed : {
       estiloDoBotao() {
-        if (this.estilo == 'padrao' || this.estilo) {
+        if (this.estilo == 'padrao' || !this.estilo) {
           return 'botao botao-padrao'
         }
 
