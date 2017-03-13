@@ -4,6 +4,8 @@
 
     <input type="search" @input="filtro = $event.target.value" placeholder="Filtre pelo título da foto" class="filtro">
 
+    <p v-show="mensagem" class="centralizado">{{ mensagem }}</p>
+
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotosComFiltro">
         <meu-painel :titulo="foto.titulo">
@@ -52,7 +54,8 @@ export default {
     return {
       titulo : 'Calopsita',
       fotos : [],
-      filtro : ''
+      filtro : '',
+      mensagem : ''
     }
   },
   created() {
@@ -63,7 +66,14 @@ export default {
   methods : {
     remove(foto) {
       if (confirm('Confirma?')) {
-        alert('Precisa saber qual foto remover!')
+        this.$http
+            .delete(`http://localhost:3000/v1/fotos/${foto._id}`)
+            .then(() => {
+              this.mensagem = 'Foto removida com sucesso'
+            },
+            (err) => {
+              this.mensagem = 'Não foi possível remover a foto'
+            })
       }
     }
   }
