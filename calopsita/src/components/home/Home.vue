@@ -59,7 +59,7 @@ export default {
     }
   },
   created() {
-    this.$http.get('http://localhost:3000/v1/fotos')
+    this.$http.get('v1/fotos')
               .then(res => res.json())
               .then(fotos => this.fotos = fotos, err => console.log(err))
   },
@@ -67,11 +67,11 @@ export default {
     remove(foto) {
       if (confirm('Confirma?')) {
         this.$http
-            .delete(`http://localhost:3000/v1/fotos/${foto._id}`)
+            .delete(`v1/fotos/${foto._id}`)
             .then(() => {
               let indice = this.fotos.indexOf(foto)
               this.fotos.splice(indice, 1)
-              
+
               this.mensagem = 'Foto removida com sucesso'
             },
             (err) => {

@@ -7,13 +7,16 @@ import { routes } from './routes'
 import './directives/Transform.js'
 
 Vue.use(VueRouter)
+Vue.use(VueResource)
+
+Vue.http.options.root = 'http://localhost:3000'
 
 const router = new VueRouter({ 
   routes,
   mode: 'history'
 })
 
-Vue.use(VueResource)
+
 
 new Vue({
   el: '#app',
