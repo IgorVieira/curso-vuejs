@@ -39,7 +39,7 @@ import FotosService from '../../domain/foto/FotoService'
 
 export default {
   components: {
-    'image-responsiva': ImageResponsiva, 
+    'image-responsiva': ImageResponsiva,
     'meu-botao': Botao
   },
   data() {
