@@ -35,6 +35,7 @@
 import ImageResponsiva from '../shared/image-responsiva/ImageResponsiva.vue'
 import Botao from '../shared/botao/Botao.vue'
 import Foto from '../../domain/foto/Foto'
+import FotosService from '../../domain/foto/FotoService'
 
 export default {
   components: {
@@ -47,12 +48,12 @@ export default {
     }
   },
   created() {
-    this.resource = this.$resource('v1/fotos{/id}')
+    this.resource = new FotosService(this.$resource)
   },
   methods : {
     gravar() {
       this.resource
-          .save(this.foto)
+          .cadastro(this.foto)
           .then(() => this.foto = new Foto(), err => console.log(err))
     }
   }
