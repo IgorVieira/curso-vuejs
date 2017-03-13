@@ -46,9 +46,13 @@ export default {
       foto : new Foto()
     }
   },
+  created() {
+    this.resource = this.$resource('v1/fotos{/id}')
+  },
   methods : {
     gravar() {
-      this.$http.post('v1/fotos', this.foto)
+      this.resource
+          .save(this.foto)
           .then(() => this.foto = new Foto(), err => console.log(err))
     }
   }
