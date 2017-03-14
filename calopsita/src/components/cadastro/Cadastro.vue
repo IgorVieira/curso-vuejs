@@ -2,7 +2,8 @@
 
   <div>
     <h1 class="centralizado">Cadastro</h1>
-    <h2 class="centralizado"></h2>
+    <h2 v-if="foto._id" class="centralizado">Alterando</h2>
+    <h2 v-else class="centralizado">Incluindo</h2>
 
     <form @submit.prevent="gravar()">
       <div class="controle">
@@ -58,10 +59,15 @@ export default {
   },
   methods : {
     gravar() {
-      console.log('FOI')
-      this.service
-          .cadastro(this.foto)
-          .then(() => this.foto = new Foto(), err => console.log(err))
+      if (this.foto._id) {
+        this.service
+            .atualiza(this.foto)
+            .then(() => this.$router.push({ name : 'home' }))
+      } else {
+        this.service
+            .cadastro(this.foto)
+            .then(() => this.foto = new Foto(), err => console.log(err))
+      }
     }
   }
 }

@@ -18,8 +18,6 @@
     },
     methods : {
       disparaAcao() {
-        console.log(typeof(this.confirmacao))
-
         if (this.confirmacao) {
           if (confirm('Confirma operação?')) {
             this.$emit('botaoAtivado')

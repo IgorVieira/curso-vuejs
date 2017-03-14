@@ -5,6 +5,9 @@ export default class FotoService {
   cadastro(foto) {
     return this._resource.save(foto)
   }
+  atualiza(foto) {
+    return this._resource.update({ id : foto._id }, foto)
+  }
   lista() {
     return this._resource
                .query()
