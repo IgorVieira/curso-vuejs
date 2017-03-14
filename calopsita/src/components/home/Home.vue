@@ -23,7 +23,6 @@
             :confirmacao="true"
             @botaoAtivado="remove(foto)"
             estilo="perigo" />
-
         </meu-painel>
       </li>
     </ul>

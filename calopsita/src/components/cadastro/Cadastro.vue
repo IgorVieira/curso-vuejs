@@ -44,15 +44,22 @@ export default {
   },
   data() {
     return {
-      foto : new Foto()
+      foto : new Foto(),
+      id : this.$route.params.id
     }
   },
   created() {
-    this.resource = new FotosService(this.$resource)
+    this.service = new FotosService(this.$resource)
+
+    if(this.id) {
+      this.service.busca(this.id)
+                  .then(foto => this.foto = foto)
+    }
   },
   methods : {
     gravar() {
-      this.resource
+      console.log('FOI')
+      this.service
           .cadastro(this.foto)
           .then(() => this.foto = new Foto(), err => console.log(err))
     }
