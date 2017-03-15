@@ -69,7 +69,7 @@ export default {
 
     this.resource
         .lista()
-        .then(fotos => this.fotos = fotos, err => console.log(err))
+        .then(fotos => this.fotos = fotos, err => this.mensagem = err.message )
   },
   methods : {
     remove(foto) {
@@ -82,10 +82,7 @@ export default {
               this.fotos.splice(indice, 1)
 
               this.mensagem = 'Foto removida com sucesso'
-            },
-            (err) => {
-              this.mensagem = 'Não foi possível remover a foto'
-            })
+            }, err => this.mensagem = err.message )
       }
     }
   }
